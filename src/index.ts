@@ -1,8 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js';
-import { config } from './config';
-import { loadCommands, loadEvents } from './utils/loader';
+import config from './config';
 
-const client = new Client({
+export const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
@@ -11,12 +10,8 @@ const client = new Client({
     ],
 });
 
-// client.commands = new Collection();
-loadEvents(client);
-loadCommands();
-
 client.once('ready', () => {
-    console.log('Discord bot is ready! 🤖');
+    console.log('Anh Google đã sẵn sàng!');
 });
 
 client.login(config.DISCORD_TOKEN);
