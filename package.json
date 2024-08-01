@@ -1,0 +1,24 @@
+{
+    "name": "google-voice-discord",
+    "version": "1.0.0",
+    "main": "src/index.ts",
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development tsx watch src/index.ts",
+        "start": "cross-env NODE_ENV=production node dist/index.js",
+        "build": "tsup src --minify",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Syaoran",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "discord.js": "^14.15.3",
+        "dotenv": "^16.4.5"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "tsup": "^8.2.3",
+        "tsx": "^4.16.4",
+        "typescript": "^5.5.4"
+    }
+}
