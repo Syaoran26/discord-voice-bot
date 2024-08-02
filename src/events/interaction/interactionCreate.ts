@@ -5,7 +5,7 @@ const commands = Object(commandModules);
 
 const interactionCreate: IEvent<'interactionCreate'> = {
     name: 'interactionCreate',
-    once: true,
+    once: false,
 
     execute: (interaction) => {
         if (!interaction.isCommand()) {

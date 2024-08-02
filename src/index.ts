@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import config from './config';
-import { loadCommands, loadEvents } from './utils';
+import { loadCommands, loadEvents } from './utils/loader';
 
 export const client = new Client<true>({
     intents: [
