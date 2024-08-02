@@ -1,7 +1,8 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import config from './config';
+import { loadCommands, loadEvents } from './utils';
 
-export const client = new Client({
+export const client = new Client<true>({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
@@ -10,8 +11,7 @@ export const client = new Client({
     ],
 });
 
-client.once('ready', () => {
-    console.log('Anh Google đã sẵn sàng!');
-});
+loadCommands();
+loadEvents(client);
 
 client.login(config.DISCORD_TOKEN);

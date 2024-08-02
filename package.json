@@ -5,8 +5,7 @@
     "scripts": {
         "build": "tsc",
         "start": "node .",
-        "dev": "concurrently \"tsc -w\" \"nodemon .\"",
-        "deploy:commands": "tsc && node build/deploy-commands.js"
+        "dev": "concurrently \"tsc -w\" \"nodemon .\""
     },
     "keywords": [],
     "author": "Syaoran",
