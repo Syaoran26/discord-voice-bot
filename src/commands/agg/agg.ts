@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, VoiceChannel } from 'discord.js';
 import ICommand from '../../interfaces/ICommand';
-import { getConnection } from '../../utils/voice-connection';
+import { getConnection, speak, textToSpeech } from '../../utils/voice-connection';
 
 const agg: ICommand = {
     data: new SlashCommandBuilder()
@@ -22,10 +22,11 @@ const agg: ICommand = {
         const voiceChannel = member.voice.channel;
 
         const connection = await getConnection(guild, voiceChannel);
+        const content = options.getString('content');
 
-        if (connection) {
-            const content = options.getString('content');
-            await interaction.reply(`Anh Google nói: ${content}`);
+        if (connection && content) {
+            const output = await textToSpeech(content, 'custom.mp3');
+            Promise.all([await interaction.reply(`Anh Google nói: ${content}`), await speak(connection, output)]);
         } else {
             await interaction.reply(`Đã có lỗi xảy ra`);
         }
