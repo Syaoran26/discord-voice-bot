@@ -5,7 +5,7 @@ import {
     VoiceConnection,
     VoiceConnectionStatus,
 } from '@discordjs/voice';
-import { Guild, Interaction, VoiceBasedChannel } from 'discord.js';
+import { Guild, VoiceBasedChannel } from 'discord.js';
 
 export const getConnection = async (
     guild: Guild,
