@@ -15,7 +15,7 @@ const voiceStateUpdate: IEvent<'voiceStateUpdate'> = {
         const { guild, channel, member } = newState;
 
         //  Kiểm tra không phải là bot
-        if (!guild || !member || member.user.bot) {
+        if (!guild || !member || member.user.bot || oldState.channel === channel) {
             return;
         }
         const _this = guild.members.cache.get(config.CLIENT_ID);
@@ -26,8 +26,7 @@ const voiceStateUpdate: IEvent<'voiceStateUpdate'> = {
 
             if (!connection) {
                 connection = await getConnection(guild, channel);
-                const output = await textToSpeech('Anh Google hello cả nhà', 'welcome.mp3');
-                await speak(connection, output);
+                await speak(connection, 'dist/audio/welcome.mp3');
             }
 
             // Kiểm tra người chơi có vào kênh mà Anh Google đang join không
