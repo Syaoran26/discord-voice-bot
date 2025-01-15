@@ -11,24 +11,28 @@ const agg: ICommand = {
         ),
 
     execute: async (interaction) => {
-        if (!interaction.isChatInputCommand()) return;
-        const { member, guild, options } = interaction;
+        try {
+            if (!interaction.isChatInputCommand()) return;
+            const { member, guild, options } = interaction;
 
-        if (!member || !guild || !('voice' in member) || !member.voice.channel) {
-            await interaction.reply('Bạn chưa tham gia kênh thoại nào!');
-            return;
-        }
+            if (!member || !guild || !('voice' in member) || !member.voice.channel) {
+                await interaction.reply('Bạn chưa tham gia kênh thoại nào!');
+                return;
+            }
 
-        const voiceChannel = member.voice.channel;
+            const voiceChannel = member.voice.channel;
 
-        const connection = await getConnection(guild, voiceChannel);
-        const content = options.getString('content');
+            const connection = await getConnection(guild, voiceChannel);
+            const content = options.getString('content');
 
-        if (connection && content) {
-            const output = await textToSpeech(content, 'custom.mp3');
-            Promise.all([await interaction.reply(`Anh Google nói: ${content}`), await speak(connection, output)]);
-        } else {
-            await interaction.reply(`Đã có lỗi xảy ra`);
+            if (connection && content) {
+                const output = await textToSpeech(content, 'custom.mp3');
+                Promise.all([await interaction.reply(`Anh Google nói: ${content}`), await speak(connection, output)]);
+            } else {
+                await interaction.reply(`Đã có lỗi xảy ra`);
+            }
+        } catch (err) {
+            console.log(err);
         }
     },
 };

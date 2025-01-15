@@ -33,7 +33,7 @@ const voiceStateUpdate: IEvent<'voiceStateUpdate'> = {
             if (_this.voice.channel === channel) {
                 let content = '';
                 if (member.user.id === config.MY_ID) {
-                    content = `Chào ngài ${member.user.displayName}`;
+                    content = `Chào anh ${member.user.displayName}`;
                 } else if (member.user.id === config.TAMMINH_ID) {
                     content = 'À con chó Tâm Minh đây rồi';
                 } else {

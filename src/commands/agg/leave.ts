@@ -6,17 +6,21 @@ const aggLeave: ICommand = {
     data: new SlashCommandBuilder().setName('leave').setDescription('Anh Google cút khỏi phòng'),
 
     execute: async (interaction) => {
-        const { guild } = interaction;
-        if (!guild) return;
+        try {
+            const { guild } = interaction;
+            if (!guild) return;
 
-        const connection = await getVoiceConnection(guild.id);
+            const connection = await getVoiceConnection(guild.id);
 
-        if (connection) {
-            await interaction.reply(`Anh Google rời khỏi kênh thoại!`);
-            connection.destroy();
-            return;
+            if (connection) {
+                await interaction.reply(`Anh Google rời khỏi kênh thoại!`);
+                connection.destroy();
+                return;
+            }
+            await interaction.reply('Anh Google chưa được quẩy ở kênh thoại nào!');
+        } catch (err) {
+            console.log(err);
         }
-        await interaction.reply('Anh Google chưa được quẩy ở kênh thoại nào!');
     },
 };
 
