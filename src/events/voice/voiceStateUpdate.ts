@@ -1,4 +1,5 @@
 import config from '../../config';
+import { getGreeting } from '../../db/greetings';
 import IEvent from '../../interfaces/IEvent';
 import { getConnection, speak, textToSpeech } from '../../utils/voice-connection';
 import { VoiceConnection } from '@discordjs/voice';
@@ -31,15 +32,11 @@ const voiceStateUpdate: IEvent<'voiceStateUpdate'> = {
 
             // Kiểm tra người chơi có vào kênh mà Anh Google đang join không
             if (_this.voice.channel === channel) {
-                let content = '';
-                if (member.user.id === config.MY_ID) {
-                    content = `Chào anh ${member.user.displayName}`;
-                } else if (member.user.id === config.TAMMINH_ID) {
-                    content = 'À con chó Tâm Minh đây rồi';
-                } else {
-                    const user = guild.members.cache.get(member.user.id);
-                    content = `Hello ${user?.nickname || member.user.globalName}`;
-                }
+                const user = guild.members.cache.get(member.user.id);
+                let content =
+                    (await getGreeting(guild.id, member.user.id)) ||
+                    `Hello ${user?.nickname || member.user.globalName}`;
+
                 const output = await textToSpeech(content, 'hello.mp3');
 
                 setTimeout(async () => {
