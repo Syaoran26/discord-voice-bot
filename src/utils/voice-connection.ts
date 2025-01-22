@@ -47,7 +47,7 @@ export const getConnection = async (
                 entersState(connection, VoiceConnectionStatus.Signalling, 5_000),
                 entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
             ]);
-        } catch (error) {
+        } catch {
             connection.destroy();
         }
     });

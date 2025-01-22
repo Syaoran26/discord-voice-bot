@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, VoiceBasedChannel } from 'discord.js';
-import { CommandInteraction, VoiceChannel } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 
 function getRandomUserInVoiceChannel(voiceChannel: VoiceBasedChannel): string | null {
     const members = Array.from(voiceChannel.members.values()).filter((member) => !member.user.bot);

@@ -4,7 +4,7 @@ import IEvent from '../../interfaces/IEvent';
 import { getConnection, speak, textToSpeech } from '../../utils/voice-connection';
 import { VoiceConnection } from '@discordjs/voice';
 
-let disconnectTimeout: any;
+let disconnectTimeout: NodeJS.Timeout | null;
 
 const voiceStateUpdate: IEvent<'voiceStateUpdate'> = {
     name: 'voiceStateUpdate',
@@ -33,7 +33,7 @@ const voiceStateUpdate: IEvent<'voiceStateUpdate'> = {
             // Kiểm tra người chơi có vào kênh mà Anh Google đang join không
             if (_this.voice.channel === channel) {
                 const user = guild.members.cache.get(member.user.id);
-                let content =
+                const content =
                     (await getGreeting(guild.id, member.user.id)) ||
                     `Hello ${user?.nickname || member.user.globalName}`;
 

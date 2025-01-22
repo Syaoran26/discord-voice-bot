@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, VoiceChannel } from 'discord.js';
+import { SlashCommandBuilder } from 'discord.js';
 import ICommand from '../../interfaces/ICommand';
 import { getConnection, speak, textToSpeech } from '../../utils/voice-connection';
 

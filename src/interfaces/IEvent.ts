@@ -2,7 +2,7 @@ import { ClientEvents } from 'discord.js';
 
 interface IEvent<T extends keyof ClientEvents> {
     name: T;
-    once: Boolean;
+    once: boolean;
     execute: (...args: ClientEvents[T]) => void;
 }
 
